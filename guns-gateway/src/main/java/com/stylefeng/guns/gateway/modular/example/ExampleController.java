@@ -1,9 +1,9 @@
 package com.stylefeng.guns.gateway.modular.example;
 
-import com.stylefeng.guns.gateway.common.SimpleObject;
+import com.stylefeng.guns.gateway.common.CurrentUser;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author fengshuonan
  * @date 2017-08-23 16:02
  */
+@Slf4j
 @Controller
 @RequestMapping("/hello")
 public class ExampleController {
 
     @RequestMapping("")
-    public ResponseEntity hello(@RequestBody SimpleObject simpleObject) {
-        System.out.println(simpleObject.getUser());
+    public ResponseEntity hello() {
+        log.info(CurrentUser.getCurrentUser());
         return ResponseEntity.ok("请求成功!");
     }
 }

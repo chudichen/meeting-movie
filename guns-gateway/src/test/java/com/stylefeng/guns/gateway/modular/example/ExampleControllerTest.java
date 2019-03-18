@@ -1,3 +1,7 @@
+package com.stylefeng.guns.gateway.modular.example;
+
+import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 /**
@@ -6,4 +10,7 @@ import static org.junit.Assert.*;
  */
 public class ExampleControllerTest {
 
+    @Test
+    public void hello() {
+    }
 }

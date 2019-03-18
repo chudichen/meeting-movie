@@ -2,6 +2,7 @@ package com.stylefeng.guns.gateway.modular.auth.filter;
 
 import com.stylefeng.guns.core.base.tips.ErrorTip;
 import com.stylefeng.guns.core.util.RenderUtil;
+import com.stylefeng.guns.gateway.common.CurrentUser;
 import com.stylefeng.guns.gateway.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.gateway.config.properties.JwtProperties;
 import com.stylefeng.guns.gateway.modular.auth.util.JwtTokenUtil;
@@ -56,9 +57,15 @@ public class AuthFilter extends OncePerRequestFilter {
 
 
         final String requestHeader = request.getHeader(jwtProperties.getHeader());
-        String authToken = null;
+        String authToken;
         if (requestHeader != null && requestHeader.startsWith("Bearer ")) {
             authToken = requestHeader.substring(7);
+            // 通过Token获取userId，并将之存入ThreadLocal，以便后续业务调用
+            String userId = jwtTokenUtil.getUsernameFromToken(authToken);
+            if (userId == null) {
+                return;
+            }
+            CurrentUser.saveUserInfo(userId);
 
             //验证token是否过期,包含了验证jwt是否正确
             try {

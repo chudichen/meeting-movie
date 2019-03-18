@@ -17,9 +17,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.stylefeng</groupId>
-            <artifactId>guns-core</artifactId>
-            <scope>test</scope>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
 

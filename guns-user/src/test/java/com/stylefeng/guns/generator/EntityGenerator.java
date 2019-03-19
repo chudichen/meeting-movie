@@ -29,13 +29,13 @@ public class EntityGenerator {
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        gc.setOutputDir("D:\\tmp\\guns\\guns-user\\src\\main\\java");//这里写你自己的java目录
+        gc.setOutputDir("/Users/michael/IdeaProjects/guns-parent/guns-user/src/main/java");//这里写你自己的java目录
         gc.setFileOverride(true);//是否覆盖
         gc.setActiveRecord(true);
         gc.setEnableCache(false);// XML 二级缓存
         gc.setBaseResultMap(true);// XML ResultMap
         gc.setBaseColumnList(false);// XML columList
-        gc.setAuthor("stylefeng");
+        gc.setAuthor("Michael.Chu");
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
@@ -50,23 +50,23 @@ public class EntityGenerator {
         });
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("root");
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/user?characterEncoding=utf8");
+        dsc.setPassword("Star.123Mysql");
+        dsc.setUrl("jdbc:mysql://192.168.1.104:3306/guns_rest?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC");
         mpg.setDataSource(dsc);
 
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
         //strategy.setTablePrefix(new String[]{"_"});// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-        strategy.setInclude(new String[]{"gateway"});
+        strategy.setInclude(new String[]{"user_t"});
         mpg.setStrategy(strategy);
 
         // 包配置
         PackageConfig pc = new PackageConfig();
         pc.setParent(null);
-        pc.setEntity("com.stylefeng.guns.user.persistence.model");
-        pc.setMapper("com.stylefeng.guns.user.persistence.dao");
-        pc.setXml("com.stylefeng.guns.user.persistence.dao.mapping");
+        pc.setEntity("com.stylefeng.guns.user.common.persistence.model");
+        pc.setMapper("com.stylefeng.guns.user.common.persistence.dao");
+        pc.setXml("com.stylefeng.guns.user.common.persistence.dao.mapping");
         pc.setService("TTT");       //本项目没用，生成之后删掉
         pc.setServiceImpl("TTT");   //本项目没用，生成之后删掉
         pc.setController("TTT");    //本项目没用，生成之后删掉

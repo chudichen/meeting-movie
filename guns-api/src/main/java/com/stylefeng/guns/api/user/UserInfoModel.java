@@ -2,6 +2,8 @@ package com.stylefeng.guns.api.user;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * 去除敏感信息的User信息
  *
@@ -9,8 +11,10 @@ import lombok.Data;
  * @date 2019-03-18 21:08
  */
 @Data
-public class UserInfoModel {
+public class UserInfoModel implements Serializable {
 
+    /** 用户的ID */
+    private Integer uuid;
     /** 用户信息 */
     private String userName;
     /** 用户昵称 */

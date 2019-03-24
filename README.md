@@ -1,2 +1,2 @@
 # Meeting Movie Project
-在线选座位的电影联系项目
+基于Guns开发的电影项目，为用户提供影片资讯。

@@ -3173,12 +3173,12 @@
              */
 
             /**
-             * @method user
-             * @grammar user() => undefined
+             * @method film
+             * @grammar film() => undefined
              * @description 重置uploader。目前只重置了队列。
              * @for  Uploader
              * @example
-             * uploader.user();
+             * uploader.film();
              */
             reset: function() {
                 this.owner.trigger('reset');
@@ -4500,7 +4500,7 @@
 
                     me.files = e.target.files;
 
-                    // user input
+                    // film input
                     clone = this.cloneNode( true );
                     clone.value = null;
                     this.parentNode.replaceChild( clone, this );

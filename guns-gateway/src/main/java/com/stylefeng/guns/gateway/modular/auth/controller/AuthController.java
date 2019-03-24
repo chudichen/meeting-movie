@@ -1,7 +1,7 @@
 package com.stylefeng.guns.gateway.modular.auth.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.stylefeng.guns.api.user.UserAPI;
+import com.stylefeng.guns.api.user.api.UserServiceApi;
 import com.stylefeng.guns.gateway.modular.auth.controller.dto.AuthRequest;
 import com.stylefeng.guns.gateway.modular.auth.controller.dto.AuthResponse;
 import com.stylefeng.guns.gateway.modular.auth.util.JwtTokenUtil;
@@ -22,15 +22,15 @@ public class AuthController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-    @Reference(interfaceClass = UserAPI.class)
-    private UserAPI userAPI;
+    @Reference(interfaceClass = UserServiceApi.class)
+    private UserServiceApi userServiceAPI;
 
     @RequestMapping(value = "${jwt.auth-path}")
     public ResponseVO createAuthenticationToken(AuthRequest authRequest) {
 
         boolean validate = true;
         // 去掉guns自身携带的用户名密码验证机制，使用自定义的
-        Integer userId = userAPI.login(authRequest.getUserName(), authRequest.getPassword());
+        Integer userId = userServiceAPI.login(authRequest.getUserName(), authRequest.getPassword());
         if (userId == 0) {
             validate = false;
         }

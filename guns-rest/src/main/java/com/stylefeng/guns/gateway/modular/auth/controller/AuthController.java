@@ -1,7 +1,7 @@
 package com.stylefeng.guns.gateway.modular.auth.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.stylefeng.guns.api.user.UserAPI;
+import com.stylefeng.guns.api.user.api.UserServiceApi;
 import com.stylefeng.guns.core.exception.GunsException;
 import com.stylefeng.guns.gateway.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.gateway.modular.auth.controller.dto.AuthRequest;
@@ -30,13 +30,13 @@ public class AuthController {
     @Resource(name = "simpleValidator")
     private IReqValidator reqValidator;
 
-    @Reference(interfaceClass = UserAPI.class)
-    private UserAPI userAPI;
+    @Reference(interfaceClass = UserServiceApi.class)
+    private UserServiceApi userServiceAPI;
 
     @RequestMapping(value = "${jwt.auth-path}")
     public ResponseEntity<?> createAuthenticationToken(AuthRequest authRequest) {
 
-        userAPI.login("tset", "test");
+        userServiceAPI.login("tset", "test");
 
         boolean validate = reqValidator.validate(authRequest);
 

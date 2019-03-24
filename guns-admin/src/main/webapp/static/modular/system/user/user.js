@@ -161,7 +161,7 @@ MgrUser.resetPwd = function () {
             btn: ['确定', '取消'],
             shade: false //不显示遮罩
         }, function () {
-            var ajax = new $ax(Feng.ctxPath + "/mgr/user", function (data) {
+            var ajax = new $ax(Feng.ctxPath + "/mgr/film", function (data) {
                 Feng.success("重置密码成功!");
             }, function (data) {
                 Feng.error("重置密码失败!");

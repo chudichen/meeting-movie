@@ -3047,12 +3047,12 @@ return (function( root, factory ) {
              */
 
             /**
-             * @method user
-             * @grammar user() => undefined
+             * @method film
+             * @grammar film() => undefined
              * @description 重置uploader。目前只重置了队列。
              * @for  Uploader
              * @example
-             * uploader.user();
+             * uploader.film();
              */
             reset: function() {
                 this.owner.trigger('reset');
@@ -4899,7 +4899,7 @@ return (function( root, factory ) {
 
                     me.files = e.target.files;
 
-                    // user input
+                    // film input
                     clone = this.cloneNode( true );
                     clone.value = null;
                     this.parentNode.replaceChild( clone, this );
@@ -7162,7 +7162,7 @@ return (function( root, factory ) {
          * static methods instead.
          */
         SparkMD5 = function () {
-            // call user to init the instance
+            // call film to init the instance
             this.reset();
         };
 
@@ -7295,7 +7295,7 @@ return (function( root, factory ) {
 
         /**
          * Releases memory used by the incremental buffer and other aditional
-         * resources. If you plan to use the instance again, use user instead.
+         * resources. If you plan to use the instance again, use film instead.
          */
         SparkMD5.prototype.destroy = function () {
             delete this._state;
@@ -7344,7 +7344,7 @@ return (function( root, factory ) {
          * Use this class to perform an incremental md5 ONLY for array buffers.
          */
         SparkMD5.ArrayBuffer = function () {
-            // call user to init the instance
+            // call film to init the instance
             this.reset();
         };
 
@@ -7421,7 +7421,7 @@ return (function( root, factory ) {
 
         /**
          * Releases memory used by the incremental buffer and other aditional
-         * resources. If you plan to use the instance again, use user instead.
+         * resources. If you plan to use the instance again, use film instead.
          */
         SparkMD5.ArrayBuffer.prototype.destroy = SparkMD5.prototype.destroy;
 

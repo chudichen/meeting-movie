@@ -4,7 +4,11 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.stylefeng.guns.api.film.api.FilmServiceApi;
 import com.stylefeng.guns.api.film.vo.CatVO;
 import com.stylefeng.guns.api.film.vo.FilmIndexVO;
+import com.stylefeng.guns.api.film.vo.SourceVO;
+import com.stylefeng.guns.api.film.vo.YearVO;
 import com.stylefeng.guns.gateway.modular.auth.vo.ResponseVO;
+import com.stylefeng.guns.gateway.modular.film.vo.FilmConditionVO;
+import com.stylefeng.guns.gateway.modular.film.vo.FilmRequestVO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,10 +69,66 @@ public class FilmController {
     public ResponseVO getConditionList(@RequestParam(name = "catId", required = false, defaultValue = "99") String catId,
                                        @RequestParam(name = "sourceId", required = false, defaultValue = "99") String sourceId,
                                        @RequestParam(name = "yearId", required = false, defaultValue = "99") String yearId) {
-        List<CatVO> cats = filmServiceApi.getCats();
-        // 判断结果集中是否存在catId，如果存在则将对应实体的active状态设置为true
-        cats.forEach(catVO -> catVO.setIsActive(Objects.equals(catVO.getCatId(), catId)));
+        FilmConditionVO filmConditionVO = new FilmConditionVO();
 
+        List<CatVO> cats = filmServiceApi.getCats();
+
+        boolean flag = false;
+        // 判断结果集中是否存在catId，如果存在则将对应实体的active状态设置为true
+        for (CatVO catVO : cats) {
+            if (Objects.equals(catVO.getCatId(), catId)) {
+                catVO.setIsActive(true);
+                flag = true;
+            }
+        }
+        if (flag) {
+            CatVO catVO = new CatVO();
+            catVO.setCatId("99");
+            catVO.setCatName("其他");
+            catVO.setIsActive(true);
+            cats.add(catVO);
+        }
+        filmConditionVO.setCatInfo(cats);
+
+        flag = false;
+        List<SourceVO> sources = filmServiceApi.getSources();
+        for (SourceVO sourceVO : sources) {
+            if (Objects.equals(sourceVO.getSourceId(), sourceId)) {
+                sourceVO.setIsActive(true);
+                flag = true;
+            }
+        }
+        if (flag) {
+            SourceVO sourceVO = new SourceVO();
+            sourceVO.setSourceId("99");
+            sourceVO.setSourceName("其他");
+            sourceVO.setIsActive(true);
+            sources.add(sourceVO);
+        }
+        filmConditionVO.setSourceInfo(sources);
+
+        flag = false;
+        List<YearVO> years = filmServiceApi.getYears();
+        for (YearVO yearVO : years) {
+            if (Objects.equals(yearVO.getYearId(), yearId)) {
+                yearVO.setIsActive(true);
+                flag = true;
+            }
+        }
+        if (flag) {
+            YearVO yearVO = new YearVO();
+            yearVO.setYearId("99");
+            yearVO.setYearName("其他");
+            yearVO.setIsActive(true);
+            years.add(yearVO);
+        }
+        filmConditionVO.setYearInfo(years);
+
+        return ResponseVO.success(filmConditionVO);
+    }
+
+    @GetMapping(value = "getFilms")
+    public ResponseVO getFilms(FilmRequestVO filmRequestVO) {
         return null;
     }
 }
